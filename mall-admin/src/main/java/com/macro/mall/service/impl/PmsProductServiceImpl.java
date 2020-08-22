@@ -205,10 +205,12 @@ public class PmsProductServiceImpl implements PmsProductService {
 
     @Override
     public List<PmsProduct> list(PmsProductQueryParam productQueryParam, Integer pageSize, Integer pageNum) {
+        //开始分页
         PageHelper.startPage(pageNum, pageSize);
         PmsProductExample productExample = new PmsProductExample();
         PmsProductExample.Criteria criteria = productExample.createCriteria();
         criteria.andDeleteStatusEqualTo(0);
+        //搜索条件 动态拼接
         if (productQueryParam.getPublishStatus() != null) {
             criteria.andPublishStatusEqualTo(productQueryParam.getPublishStatus());
         }
